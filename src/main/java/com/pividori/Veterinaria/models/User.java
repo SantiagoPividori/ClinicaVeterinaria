@@ -1,9 +1,6 @@
 package com.pividori.Veterinaria.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.util.List;
 
@@ -12,24 +9,28 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
+    private Long id;
+    private String name;
+    private String lastname;
+    private String phoneNum;
+    private String adress;
+    @OneToMany(mappedBy = "owner")
+    private List<Pet> pets;
 
-    String name;
-    String lastname;
-    List<Pet> pets;
-
-    public User(){
+    public User() {
     }
 
-    public User(String name, String lastname){
+    public User(String name, String lastname) {
         this.name = name;
         this.lastname = lastname;
     }
 
-    public User(String name, String lastname, List<Pet> pets){
+    public User(String name, String lastname, String phoneNum, String adress, List<Pet> pets) {
         this.name = name;
         this.lastname = lastname;
         this.pets = pets;
+        this.phoneNum = phoneNum;
+        this.adress = adress;
     }
 
     public Long getId() {
@@ -50,5 +51,29 @@ public class User {
 
     public void setLastname(String lastname) {
         this.lastname = lastname;
+    }
+
+    public String getPhoneNum() {
+        return phoneNum;
+    }
+
+    public void setPhoneNum(String phoneNum) {
+        this.phoneNum = phoneNum;
+    }
+
+    public String getAdress() {
+        return adress;
+    }
+
+    public void setAdress(String adress) {
+        this.adress = adress;
+    }
+
+    public List<Pet> getPets() {
+        return pets;
+    }
+
+    public void setPets(List<Pet> pets) {
+        this.pets = pets;
     }
 }
