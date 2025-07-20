@@ -12,20 +12,21 @@ public class Pet {
     private Long id;
     private String name;
     private LocalDate birthday;
+    private String status;
     @ManyToOne
     @JoinColumn(name = "owner_id")
-    private User owner;
+    private Client owner;
 
     public Pet() {
     }
 
-    public Pet(String name, LocalDate birthday, User owner) {
+    public Pet(String name, LocalDate birthday, Client owner) {
         this.name = name;
         this.owner = owner;
         this.birthday = birthday;
     }
 
-    public Long getId(){
+    public Long getId() {
         return id;
     }
 
@@ -45,11 +46,11 @@ public class Pet {
         this.birthday = birthday;
     }
 
-    public User getOwner() {
+    public Client getOwner() {
         return owner;
     }
 
-    public void setOwner(User owner) {
+    public void setOwner(Client owner) {
         this.owner = owner;
     }
 
