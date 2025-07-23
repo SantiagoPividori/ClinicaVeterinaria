@@ -1,13 +1,13 @@
 package com.pividori.Veterinaria.service;
 
 import com.pividori.Veterinaria.repository.IClientRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+@RequiredArgsConstructor
 @Service
 public class ClientService implements IClientService{
 
-    @Autowired
-    private IClientRepository clientRepository;
+    private final IClientRepository clientRepository;
 
 }

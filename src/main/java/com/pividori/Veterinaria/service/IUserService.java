@@ -1,4 +1,4 @@
 package com.pividori.Veterinaria.service;
 
-public interface IEmployeeService {
+public interface IUserService {
 }

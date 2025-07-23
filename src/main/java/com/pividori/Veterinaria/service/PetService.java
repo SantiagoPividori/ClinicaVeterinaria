@@ -1,13 +1,13 @@
 package com.pividori.Veterinaria.service;
 
 import com.pividori.Veterinaria.repository.IPetRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+@RequiredArgsConstructor
 @Service
 public class PetService implements IPetService{
 
-    @Autowired
-    private IPetRepository petRepository;
+    private final IPetRepository petRepository;
 
 }

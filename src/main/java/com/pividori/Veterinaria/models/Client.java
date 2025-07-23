@@ -2,58 +2,66 @@ package com.pividori.Veterinaria.models;
 
 import com.pividori.Veterinaria.enums.Gender;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import lombok.*;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
 
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
 @Entity
-public class Client extends Person {
+public class Client {
 
+    @Setter(AccessLevel.NONE)
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @NotBlank(message = "The name cannot be empty")
+    @Column(nullable = false)
+    private String name;
+    @NotBlank(message = "The lastname cannot be empty")
+    @Column(nullable = false)
+    private String lastname;
+    @NotBlank(message = "The address cannot be empty")
+    @Column(nullable = false)
+    private String address;
+    @NotBlank(message = "The phone number cannot be empty")
+    @Column(nullable = false)
+    private String phoneNumber;
+    @Email(message = "The email must be in a valid format")
+    private String email;
+    @NotNull(message = "The gender cannot be empty")
+    @Enumerated(EnumType.STRING)
+    private Gender gender;
+    @Builder.Default
+    private LocalDateTime createdAt;
+    @ElementCollection
     private List<LocalDate> visit;
     @OneToMany(mappedBy = "owner")
     private List<Pet> pets;
 
-    public Client() {
+    @PrePersist
+    public void prePersist() {
+        this.createdAt = LocalDateTime.now();
     }
 
-    public Client(String name, String lastname, String phoneNumber, List<Pet> pets, LocalDate visit) {
-        super(name, lastname, phoneNumber);
-        this.pets = pets;
-        this.visit.add(visit);
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Client client = (Client) o;
+        return Objects.equals(id, client.id);
     }
 
-    public Client(String name, String dni, String nationality, Gender gender, LocalDate birthdate, String email, String phoneNumber, String address, String lastname, LocalDate visit, List<Pet> pets) {
-        super(name, dni, nationality, gender, birthdate, email, phoneNumber, address, lastname);
-        this.visit.add(visit);
-        this.pets = pets;
-    }
-
-    public Client(String name, String dni, String nationality, Gender gender, LocalDate birthdate, String email, String phoneNumber, String address, String lastname, LocalDate visit, Pet pets) {
-        super(name, dni, nationality, gender, birthdate, email, phoneNumber, address, lastname);
-        this.visit.add(visit);
-        this.pets.add(pets);
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public List<LocalDate> getVisit() {
-        return visit;
-    }
-
-    public void setVisit(List<LocalDate> visit) {
-        this.visit = visit;
-    }
-
-    public List<Pet> getPets() {
-        return pets;
-    }
-
-    public void setPets(List<Pet> pets) {
-        this.pets = pets;
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }
