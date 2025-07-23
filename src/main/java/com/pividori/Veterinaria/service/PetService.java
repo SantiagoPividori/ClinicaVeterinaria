@@ -1,13 +1,13 @@
 package com.pividori.Veterinaria.service;
 
-import com.pividori.Veterinaria.repository.IClientRepository;
+import com.pividori.Veterinaria.repository.IPetRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class ClientService implements IClientService{
+public class PetService implements IPetService{
 
     @Autowired
-    private IClientRepository clientRepository;
+    private IPetRepository petRepository;
 
 }
