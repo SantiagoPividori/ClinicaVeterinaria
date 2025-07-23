@@ -5,3 +5,4 @@ Sistema de gestión de reservas y servicios para una clínica veterinaria.
  * Java 17
  * Spring boot
  * Spring Security
+ * Spring Data
