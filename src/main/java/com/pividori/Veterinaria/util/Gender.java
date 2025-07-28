@@ -1,4 +1,4 @@
-package com.pividori.Veterinaria.enums;
+package com.pividori.Veterinaria.util;
 
 public enum Gender {
 

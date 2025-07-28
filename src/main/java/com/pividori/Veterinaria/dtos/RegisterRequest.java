@@ -1,4 +1,8 @@
 package com.pividori.Veterinaria.dtos;
 
-public class RegisterRequest {
+public record RegisterRequest(
+        String username,
+        String password,
+        String name
+) {
 }
